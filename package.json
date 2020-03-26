@@ -13,7 +13,7 @@
     "@types/lodash-es": "^4.17.3",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
-    "antd": "^4.0.4",
+    "antd": "3",
     "babel-eslint": "10.1.0",
     "babel-jest": "^24.9.0",
     "babel-loader": "8.1.0",
@@ -76,7 +76,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "publish": "set GENERATE_SOURCEMAP=false& node scripts/build.js ",
+    "pub": "set GENERATE_SOURCEMAP=false& node scripts/build.js ",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {

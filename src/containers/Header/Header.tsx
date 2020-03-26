@@ -1,65 +1,74 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapMutations } from 'src/redux';
 import { Layout, Menu, Dropdown, Avatar, Icon } from 'antd';
 import './style.scss';
 
-const { Header} = Layout;
+const { Header } = Layout;
 
 interface Iprops {
-  userInfo: any
+  userInfo?: any;
+  hideMenu?: boolean;
+  toggleMenu?: Function;
 }
 
-const mapStateToProps = (state) => {
-  return {
-    userInfo: state.app.userInfo,
-  };
-};
+const mapStateToProps = ({ app, header }) => ({
+  userInfo: app.userInfo,
+  hideMenu: header.hideMenu,
+});
 
-const mapDispatchToProps = () => {
-  return {
-    getUserInfo: mapMutations.app.getUserInfo,
-  };
-};
+const mapDispatchToProps = () => ({
+  getUserInfo: mapMutations.app.getUserInfo,
+  toggleMenu: mapMutations.header.toggleMenu,
+});
 
 
-function MainHeader(props: Iprops) {
+class MainHeader extends Component<Iprops, any> {
 
-  const { userInfo } = props;
+  toggleMenu = () => {
+    const { hideMenu, toggleMenu } = this.props;
+    toggleMenu(!hideMenu);
+  }
 
-  const onMenuClick = ({ key }) => {
-    // console.log("menu click: ", key)
-    // const { dispatch } = props;
-    // if (key === 'logout') {
-    //   dispatch({
-    //     type: 'login/logout',
-    //   });
-    // }
-  };
-  
-  const menu = (
-    <Menu
-      className="o"
-      selectedKeys={[]}
-      onClick={onMenuClick}
-      style={{ marginTop: 5 }}
-    >
-      <Menu.Item key="logout">
-        <Icon type="logout" />退出登录
+  render() {
+
+    const { userInfo, hideMenu } = this.props;
+    const onMenuClick = ({ key }) => {
+      // console.log("menu click: ", key)
+      // const { dispatch } = props;
+      // if (key === 'logout') {
+      //   dispatch({
+      //     type: 'login/logout',
+      //   });
+      // }
+    };
+
+    const menu = (
+      <Menu
+        className="o"
+        selectedKeys={[]}
+        onClick={onMenuClick}
+        style={{ marginTop: 5 }}
+      >
+        <Menu.Item key="logout">
+          <Icon type="logout" />退出登录
         </Menu.Item>
-    </Menu>
-  );
+      </Menu>
+    );
 
-  return (
-    <Header className="header main-header">
-      <a className="logo" >
-        {/* <img src={logo} width="140" height="48" /> */}
-      </a>
-      <div className="header-left">
-        <a className="all normal" >总览</a>
-      </div>
-    </Header>
-  );
+    return (
+      <Header className="header main-header">
+        <a className="logo" >
+          {/* <img src={logo} width="140" height="48" /> */}
+        </a>
+        <div className="header-left">
+          <a onClick={this.toggleMenu} >
+            <Icon type={`menu-${hideMenu ? 'un' : ''}fold`} />
+          </a>
+        </div>
+      </Header>
+    );
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { Layout, Menu, Icon } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import isEqual from 'lodash-es/isEqual';
@@ -9,10 +10,13 @@ const { Sider } = Layout;
 const initialState = {
   openKeys: [],
   selectedKeys: [],
-}
+};
 
 type Istate = Readonly<typeof initialState>;
 
+@connect(({ header: { hideMenu } }) => ({
+  hideMenu,
+}))
 class LeftNav extends React.PureComponent<any, Istate> {
   readonly state: Istate = initialState;
 
@@ -28,12 +32,12 @@ class LeftNav extends React.PureComponent<any, Istate> {
     this.setMenu(newMenuKey);
   }
 
-  setMenu=(menuKeys)=>{
+  setMenu = (menuKeys) => {
     const selectedKeys = this.addUp(menuKeys);
     this.setState({
       openKeys: [selectedKeys[0]],
       selectedKeys: selectedKeys,
-    })
+    });
   }
 
 
@@ -47,13 +51,13 @@ class LeftNav extends React.PureComponent<any, Istate> {
         (all as string) += o;
       }
       return all;
-    })
+    });
   }
 
   onOpenChange = (openKeys: string[]) => {
     this.setState({
       openKeys,
-    })
+    });
   }
 
 
@@ -61,9 +65,16 @@ class LeftNav extends React.PureComponent<any, Istate> {
 
   render() {
     const { selectedKeys, openKeys } = this.state;
-    const { menuList } = this.props;
+    const { menuList, hideMenu } = this.props;
+    console.log(hideMenu, 333)
     return (
-      <Sider width={160} style={{ background: '#fff' }}>
+      <Sider
+        width={160}
+        style={{ background: '#fff' }}
+        trigger={null}
+        collapsible
+        collapsed={hideMenu}
+      >
         <Menu
           className="left-nav-menu"
           theme="dark"
@@ -79,7 +90,7 @@ class LeftNav extends React.PureComponent<any, Istate> {
                 title={
                   <span>
                     {subMenu.icon && <Icon type={subMenu.icon} />}
-                    {subMenu.text}
+                    {!hideMenu && subMenu.text}
                   </span>
                 }
               >
@@ -99,7 +110,7 @@ class LeftNav extends React.PureComponent<any, Istate> {
               >
                 <Link to={subMenu.path}>
                   {subMenu.icon && <Icon type={subMenu.icon} />}
-                  {subMenu.text}
+                  {!hideMenu && subMenu.text}
                 </Link>
               </Menu.Item>
           ))
