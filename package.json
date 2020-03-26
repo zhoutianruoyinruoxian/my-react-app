@@ -25,7 +25,6 @@
     "css-loader": "3.4.2",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
-    "echarts": "^4.7.0",
     "eslint": "^6.6.0",
     "eslint-config-react-app": "^5.2.1",
     "eslint-loader": "3.0.3",
@@ -45,6 +44,7 @@
     "lodash-es": "^4.17.15",
     "mini-css-extract-plugin": "0.9.0",
     "moment": "^2.24.0",
+    "node-sass": "^4.13.1",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.6.4",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -76,6 +76,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "publish": "set GENERATE_SOURCEMAP=false& node scripts/build.js ",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
@@ -160,7 +161,8 @@
           "libraryName": "antd",
           "libraryDirectory": "es",
           "style": "true"
-        }
+        },
+        "antd"
       ],
       [
         "import",
@@ -168,11 +170,16 @@
           "libraryName": "lodash",
           "libraryDirectory": "",
           "camel2DashComponentName": false
-        }
+        },
+        "lodash"
       ],
       [
         "@babel/plugin-syntax-dynamic-import"
       ]
     ]
-  }
+  },
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  },
+  "homepage": "."
 }

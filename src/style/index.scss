@@ -1,0 +1,19 @@
+@import "./_reset.scss";
+
+#root {
+  height: 100%;
+  .App {
+    height: inherit;
+    .ant-layout {
+      height: inherit;
+    }
+  }
+}
+
+h1{
+  font-size: 18px;
+  font-weight: bold;
+}
+.text-align-center {
+  text-align: center;
+}

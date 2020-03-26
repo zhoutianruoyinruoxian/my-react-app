@@ -21,7 +21,7 @@ const menuList: Array<MenuListItem> = [
         path: '/ObserverMode',
         text: '观察者模式',
       },
-    ]
+    ],
   },
   {
     path: '/ComponentTest',
@@ -47,8 +47,8 @@ const menuList: Array<MenuListItem> = [
       {
         path: '/Gantt',
         text: '甘特图',
-      }
-    ]
+      },
+    ],
   },
   {
     path: '/DataStructure',
@@ -59,7 +59,7 @@ const menuList: Array<MenuListItem> = [
         path: '/Graph',
         text: '图',
       },
-    ]
+    ],
   },
   {
     path: '/Nest',
@@ -70,7 +70,7 @@ const menuList: Array<MenuListItem> = [
         path: '/Test',
         text: '测试',
       },
-    ]
+    ],
   },
 ];
 
