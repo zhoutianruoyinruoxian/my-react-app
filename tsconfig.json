@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "target": "ESNext",
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "allowUnreachableCode": true,
+    "allowJs": true,
+    "baseUrl": ".",
+    "locale": "zh-cn",
+    "paths": {
+      "src": [
+        "./src"
+      ],
+      "api": [
+        "./src/api"
+      ],
+      "@": [
+        "./src/components"
+      ],
+      "lib": [
+        "./src/library"
+      ],
+      "pages": [
+        "./src/pages"
+      ],
+      "variable": [
+        "./src/style/variable.scss"
+      ]
+    },
+    "lib": [
+      "es5",
+      "es2015",
+      "es2016",
+      "es2017",
+      "es2018",
+      "dom"
+    ]
+  },
+  "include": [
+    "./src/**/*"
+  ],
+}

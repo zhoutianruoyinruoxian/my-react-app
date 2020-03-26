@@ -1,0 +1,24 @@
+.section-title {
+  text-align: left;
+  & > h2 {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    &::after {
+      height: 1px;
+      content: "";
+      display: block;
+      background-color: #bbb;
+      margin: 7px 0 10px;
+    }
+  }
+  & > p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 0;
+  }
+  & > div {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+}

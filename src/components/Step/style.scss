@@ -1,0 +1,40 @@
+.step-component {
+  $stepHeight: 38px;
+  $arrowWidth: 14px;
+  $commonBC: #ddd;
+  $activeBC: #999;
+  font-size: 14px;
+  height: $stepHeight;
+  line-height: $stepHeight;
+  overflow: hidden;
+  .step-section {
+    position: relative;
+    left: -$arrowWidth;
+    height: inherit;
+    .step-group {
+      height: inherit;
+      float: left;
+      position: relative;
+      height: inherit;
+      background-color: $commonBC;
+      text-align: center;
+      &::after {
+        content: "";
+        height: inherit;
+        position: absolute;
+        width: $arrowWidth;
+        right: -$arrowWidth;
+        top: 0;
+        border-top: $stepHeight/2 solid transparent;
+        border-bottom: $stepHeight/2 solid transparent;
+        border-left: $arrowWidth solid $commonBC;
+      }
+      &.active {
+        background-color: $activeBC;
+        &::after {
+          border-left-color: $activeBC;
+        }
+      }
+    }
+  }
+}

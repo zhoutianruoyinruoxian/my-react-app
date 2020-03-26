@@ -1,0 +1,21 @@
+.no-data{
+  padding: 142px 0 50px;
+  text-align: center;
+  .no-data-img{
+    width: 98px;
+    height: 98px;
+  }
+  .no-data-content{
+    margin-top: 19px;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+  }
+}
+.no-data.no-data-small{
+  padding: 20px;
+  .no-data-content{
+    display: inline-block;
+    margin: 0;
+  }
+}
