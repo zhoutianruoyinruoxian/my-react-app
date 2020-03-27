@@ -9,7 +9,7 @@ export interface ReturnDataType {
 }
 
 interface DefaultOption extends AxiosRequestConfig {
-  errorHandling: boolean
+  errorHandling: boolean;
 }
 export const defaultOption: DefaultOption = {
   timeout: 10000,
@@ -17,7 +17,7 @@ export const defaultOption: DefaultOption = {
   validateStatus(status: number) {
     return (status >= 200 && status < 300) || status === 304; // 默认的
   },
-  headers: { 'token': localStorage.token || '' }
+  headers: { 'token': localStorage.token || '' },
 };
 
 export const didRequest = (res: AxiosResponse<ReturnDataType>) => {
@@ -59,11 +59,11 @@ export function didRequestError(error: AxiosError) {
 }
 
 function toLogin() {
-  api.login({ returnUrl: location.href }).then(res => {
-    location.href = res.result;
-  })
+  api.login({ returnUrl: window.location.href }).then(res => {
+    window.location.href = res.result;
+  });
 }
 
 function noPermission() {
-  location.href = '/NoPermission';
+  window.location.href = '/NoPermission';
 }

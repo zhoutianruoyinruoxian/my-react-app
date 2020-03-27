@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import './index.css';
 import { ConfigProvider } from 'antd';
 import 'antd/dist/antd.css';
 import zhCN from 'antd/es/locale/zh_CN';

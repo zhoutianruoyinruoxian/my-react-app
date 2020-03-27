@@ -40,7 +40,6 @@ class LeftNav extends React.PureComponent<any, Istate> {
     });
   }
 
-
   addUp(list: Array<string>) {
     let all: string;
     return list.map((o, i) => {
@@ -60,17 +59,14 @@ class LeftNav extends React.PureComponent<any, Istate> {
     });
   }
 
-
   getMenuKey = (path: string) => path.match(/\/[a-zA-Z0-9]*/g);
 
   render() {
     const { selectedKeys, openKeys } = this.state;
     const { menuList, hideMenu } = this.props;
-    console.log(hideMenu, 333)
+
     return (
       <Sider
-        width={160}
-        style={{ background: '#fff' }}
         trigger={null}
         collapsible
         collapsed={hideMenu}
@@ -80,8 +76,8 @@ class LeftNav extends React.PureComponent<any, Istate> {
           theme="dark"
           mode="inline"
           onOpenChange={this.onOpenChange}
-          selectedKeys={selectedKeys}
-          openKeys={openKeys}
+          selectedKeys={hideMenu ? null : selectedKeys}
+          openKeys={hideMenu ? null : openKeys}
         >
           {menuList.map(subMenu => (
             subMenu.children ?
@@ -90,7 +86,7 @@ class LeftNav extends React.PureComponent<any, Istate> {
                 title={
                   <span>
                     {subMenu.icon && <Icon type={subMenu.icon} />}
-                    {!hideMenu && subMenu.text}
+                    <span>{subMenu.text}</span>
                   </span>
                 }
               >
@@ -100,7 +96,7 @@ class LeftNav extends React.PureComponent<any, Istate> {
                   >
                     <Link to={subMenu.path + o.path}>
                       {o.icon && <Icon type={o.icon} />}
-                      {o.text}
+                      <span>{o.text}</span>
                     </Link>
                   </Menu.Item>
                 ))}
@@ -110,7 +106,7 @@ class LeftNav extends React.PureComponent<any, Istate> {
               >
                 <Link to={subMenu.path}>
                   {subMenu.icon && <Icon type={subMenu.icon} />}
-                  {!hideMenu && subMenu.text}
+                  <span>{subMenu.text}</span>
                 </Link>
               </Menu.Item>
           ))

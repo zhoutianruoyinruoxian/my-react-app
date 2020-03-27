@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
 import menuList from 'src/config/menuList';
-import './App.css';
 import { Header, LeftNav, Footer } from 'src/containers';
 
 const { Content } = Layout;

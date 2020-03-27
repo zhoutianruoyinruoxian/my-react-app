@@ -66,6 +66,9 @@ class MainHeader extends Component<Iprops, any> {
             <Icon type={`menu-${hideMenu ? 'un' : ''}fold`} />
           </a>
         </div>
+        <div className="header-right">
+          
+        </div>
       </Header>
     );
   }
