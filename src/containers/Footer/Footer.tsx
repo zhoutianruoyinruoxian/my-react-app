@@ -9,6 +9,9 @@ export default () => (
       textAlign: 'center',
       padding: '12px',
       color: 'rgba(0,0,0,0.45)',
+      position: 'absolute',
+      bottom: 0,
+      width: '100%',
     }}
   >
     数蜂科技上云迁云团队

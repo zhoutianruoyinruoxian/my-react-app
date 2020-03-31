@@ -1,9 +1,10 @@
 import React, { SFC } from 'react';
+import { Header } from 'src/containers';
 import './style.scss';
 
 interface InitProps {
   className?: string;
-  style?:React.CSSProperties;
+  style?: React.CSSProperties;
   title?: React.ReactNode;
   description?: React.ReactNode;
   children?: React.ReactNode;
@@ -19,11 +20,14 @@ const Content: SFC<Iprops> = ({
   ...args
 }) => {
   return (
-    <div className={`main-content ${className}`} {...args}>
-      <h1>{title}</h1>
-      <div>{children}</div>
-    </div>
-  )
-}
+    <>
+      <Header />
+      <div className={`main-content ${className}`} {...args}>
+        <h1>{title}</h1>
+        <div>{children}</div>
+      </div>
+    </>
+  );
+};
 
 export default Content;

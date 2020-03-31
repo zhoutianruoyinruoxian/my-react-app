@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapMutations } from 'src/redux';
 import { Layout, Menu, Dropdown, Avatar, Icon } from 'antd';
+import { Breadcrumb } from 'src/containers';
 import './style.scss';
 
 const { Header } = Layout;
@@ -43,6 +44,20 @@ class MainHeader extends Component<Iprops, any> {
       // }
     };
 
+    const regionMenu = (
+      <Menu>
+        <Menu.Item>
+          <a>区域1</a>
+        </Menu.Item>
+        <Menu.Item>
+          <a>区域2</a>
+        </Menu.Item>
+        <Menu.Item>
+          <a>区域3</a>
+        </Menu.Item>
+      </Menu>
+    );
+
     const menu = (
       <Menu
         className="o"
@@ -65,9 +80,14 @@ class MainHeader extends Component<Iprops, any> {
           <a onClick={this.toggleMenu} >
             <Icon type={`menu-${hideMenu ? 'un' : ''}fold`} />
           </a>
+          <Breadcrumb />
         </div>
         <div className="header-right">
-          
+          <Dropdown overlay={regionMenu}>
+            <a className="ant-dropdown-link" onClick={e => { console.log(e, 999) }}>
+              Hover me <Icon type="down" />
+            </a>
+          </Dropdown>
         </div>
       </Header>
     );

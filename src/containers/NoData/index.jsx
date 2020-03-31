@@ -33,7 +33,13 @@ export default (props) => {
       className={`${size === 'small' ? 'no-data-small' : ''} no-data ${className || ''}`}
       {...args}
     >
-      {typeof img === 'string' && <img className="no-data-img" src={img && require(`../../resource/noDataImg/${img}`)} alt="" />}
+      {typeof img === 'string' &&
+        <img className="no-data-img"
+          src={img
+            //  && 
+            // require(`../../resource/noDataImg/${img}`)
+          }
+          alt="" />}
       {typeof img === 'object' && img !== null && img}
       <p className="no-data-content">{content}</p>
     </div >

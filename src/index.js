@@ -9,13 +9,15 @@ import store, { reducers } from 'src/redux';
 import * as serviceWorker from './serviceWorker';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
+import './style/index.scss';
+
 moment.locale('zh-cn'); // 设置moment全局语言
 
 if (process.env.NODE_ENV !== 'production' && module.hot) {
   module.hot.accept('./redux', () => store.replaceReducer(reducers));
 }
-const renderApp = () => {
-  const Router = route(store);
+const renderApp = async () => {
+  const Router = await route(store);
   ReactDOM.render(
     <Provider store={store}>
       <ConfigProvider locale={zhCN}>

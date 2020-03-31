@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
-import menuList from 'src/config/menuList';
-import { Header, LeftNav, Footer } from 'src/containers';
+import routeList from 'src/config/router.config';
+import { LeftNav, Footer } from 'src/containers';
 
 const { Content } = Layout;
 class App extends Component {
@@ -10,10 +10,9 @@ class App extends Component {
     return (
       <div className="App">
         <Layout>
-          <Header />
           <Layout>
-            <LeftNav menuList={menuList} />
-            <Layout style={{ padding: '24px 24px 0 24px' }}>
+            <LeftNav routeList={routeList} />
+            <Layout style={{ padding: '24px 24px 46px 24px', position: 'relative' }}>
               <Content>
                 {this.props.children}
               </Content>
