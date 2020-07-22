@@ -4,9 +4,9 @@ import App from '../App';
 import routeList, { RouteItem } from 'src/config/router.config';
 
 const supportsHistory = 'pushState' in window.history;
-type RouteTransform = (list: RouteItem[], path?: string) => Promise<any[]>;
+type RouteTransform = (list: RouteItem[], path?: string, nest?: boolean) => Promise<any[]>;
 
-const routeTransform: RouteTransform = async (list, path = '') => {
+const routeTransform: RouteTransform = async (list, path = '', nest) => {
   let routerList = [];
   for (let i = 0; i < list.length; i++) {
     const route = list[i];
@@ -14,17 +14,18 @@ const routeTransform: RouteTransform = async (list, path = '') => {
       routerList.push(
         <Redirect exact from={route.path} to={path + route.redirect} key={route.path} />,
       );
-      break;
+      continue;
     }
     if (route.component) {
       const file = await import('src/pages/' + route.component);
       let childRoutes = null;
       if (route.routes) {
-        childRoutes = await routeTransform(route.routes, path + route.path);
+        childRoutes = await routeTransform(route.routes, '.', true);
       }
+      console.log(path + route.path, 3333333)
       routerList.push(
         <Route
-          exact
+          exact={!nest}
           sensitive
           component={file.default}
           path={path + route.path}
@@ -33,18 +34,18 @@ const routeTransform: RouteTransform = async (list, path = '') => {
           {childRoutes}
         </Route>,
       );
-      break;
+      continue;
     }
     if (route.routes) {
       routerList = routerList.concat(await routeTransform(route.routes, path + route.path));
-      break;
+      continue;
     }
   }
+  console.log(routerList, 9999999999)
   return routerList;
 };
 
 export default async (store) => {
-  console.log(store.getState(), 777)
   const children = await routeTransform(routeList);
   return (
     <BrowserRouter forceRefresh={!supportsHistory}>
