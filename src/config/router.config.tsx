@@ -29,6 +29,7 @@ const menuList: Array<RouteItem> = [
     path: '/AssetRisk',
     name: '资产风险',
     icon: <AppstoreOutlined />,
+    component: 'AssetRisk',
     routes: [
       {
         path: '/',
@@ -40,7 +41,7 @@ const menuList: Array<RouteItem> = [
         icon: <AppstoreOutlined />,
         routes: [
           {
-            path: '/index',
+            path: '',
             name: '攻击面管理',
             component: 'AssetRisk/AttackSurfaceManagement',
           },

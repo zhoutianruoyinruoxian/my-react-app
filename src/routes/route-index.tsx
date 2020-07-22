@@ -12,25 +12,36 @@ const routeTransform: RouteTransform = async (list, path = '') => {
     const route = list[i];
     if (route.redirect) {
       routerList.push(
-        <Redirect exact from={path + route.path} to={path + route.redirect} key={route.path} />,
+        <Redirect exact from={path + route.path} to={path + route.redirect} key={path + route.path} />,
+      );
+      continue;
+    }
+    if (route.component) {
+      const file = await import('src/pages/' + route.component);
+      const Component = file.default;
+      let children = null;
+      let exact = true;
+      if (route.routes) {
+        exact = false;
+        children = await routeTransform(route.routes, path + route.path);
+      }
+      routerList.push(
+        <Route
+          exact={exact}
+          sensitive
+          component={() =>
+            <Component>
+              {children}
+            </Component>
+          }
+          path={path + route.path}
+          key={path + route.path}
+        />,
       );
       continue;
     }
     if (route.routes) {
       routerList = routerList.concat(await routeTransform(route.routes, path + route.path));
-      continue;
-    }
-    if (route.component) {
-      const file = await import('src/pages/' + route.component);
-      routerList.push(
-        <Route
-          exact={true}
-          sensitive
-          component={file.default}
-          path={path + route.path}
-          key={path + route.path}
-        />,
-      );
       continue;
     }
   }

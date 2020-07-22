@@ -10,14 +10,12 @@ class App extends Component {
     return (
       <div className="App">
         <Layout>
-          <Layout>
-            <LeftNav routeList={routeList} />
-            <Layout style={{position: 'relative' }}>
-              <Content>
-                {this.props.children}
-              </Content>
-              <Footer />
-            </Layout>
+          <LeftNav routeList={routeList} />
+          <Layout style={{ position: 'relative' }}>
+            <Content>
+              {this.props.children}
+            </Content>
+            <Footer />
           </Layout>
         </Layout>
       </div>
