@@ -1,6 +1,6 @@
 import React, { PureComponent, ReactNode } from 'react';
 import { connect } from 'react-redux';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu } from 'antd';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import isEqual from 'lodash-es/isEqual';
 import { RouteItem } from 'src/config/router.config';
@@ -40,7 +40,7 @@ class LeftNav extends PureComponent<LeftNavProps & RouteComponentProps, Istate> 
   setMenu = (menuKeys) => {
     const selectedKeys = this.addUp(menuKeys);
     this.setState({
-      openKeys: [selectedKeys[0]],
+      openKeys: selectedKeys,
       selectedKeys: selectedKeys,
     });
   }
@@ -67,19 +67,20 @@ class LeftNav extends PureComponent<LeftNavProps & RouteComponentProps, Istate> 
   getMenuKey = (path: string) => path.match(/\/[a-zA-Z0-9]*/g);
 
 
-  generateMenuDom = (routeList: LeftNavProps['routeList'], subMenu = true, subPath = ''): ReactNode[] => {
+  generateMenuDom = (routeList: LeftNavProps['routeList'], subPath = ''): ReactNode[] => {
     let menuList: ReactNode[] = [];
     let menuListItem: ReactNode;
     routeList.forEach(route => {
       if (!route.name || route.hideInMenu) return;
-      if (subMenu && route.routes && !route.hideChildrenInMenu) {
-        const childMenuList = this.generateMenuDom(route.routes, false, route.path);
+      const path = subPath + route.path;
+      if (route.routes && !route.hideChildrenInMenu) {
+        const childMenuList = this.generateMenuDom(route.routes, path);
         menuListItem = (
           <Menu.SubMenu
-            key={route.path}//SubMenu的key值针对的是openKeys
+            key={path}//SubMenu的key值针对的是openKeys
+            icon={route.icon}
             title={
               <span>
-                {route.icon && <Icon type={route.icon} />}
                 <span>{route.name}</span>
               </span>
             }
@@ -90,10 +91,10 @@ class LeftNav extends PureComponent<LeftNavProps & RouteComponentProps, Istate> 
       } else {
         menuListItem = (
           <Menu.Item
-            key={subPath + route.path}//Item的key值针对的是selectedKeys
+            key={path}//Item的key值针对的是selectedKeys
           >
-            <Link to={subPath + route.path}>
-              {route.icon && <Icon type={route.icon} />}
+            <Link to={path}>
+              {route.icon}
               <span>{route.name}</span>
             </Link>
           </Menu.Item>
@@ -118,7 +119,7 @@ class LeftNav extends PureComponent<LeftNavProps & RouteComponentProps, Istate> 
           theme="dark"
           mode="inline"
           onOpenChange={this.onOpenChange}
-          selectedKeys={hideMenu ? null : selectedKeys}
+          selectedKeys={selectedKeys}
           openKeys={hideMenu ? null : openKeys}
         >
           {this.generateMenuDom(routeList)}

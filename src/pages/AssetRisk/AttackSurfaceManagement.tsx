@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Content } from 'src/containers';
+import { Content } from 'containers';
 
 export default class AttackSurfaceManagement extends Component<any, any> {
 
   render() {
-    console.log(this.props.match, 2222)
     return (
       <Content>
         <div className="home bip">

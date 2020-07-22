@@ -12,7 +12,7 @@ class App extends Component {
         <Layout>
           <Layout>
             <LeftNav routeList={routeList} />
-            <Layout style={{ padding: '24px 24px 46px 24px', position: 'relative' }}>
+            <Layout style={{position: 'relative' }}>
               <Content>
                 {this.props.children}
               </Content>

@@ -1,14 +1,18 @@
+import React from 'react';
+import {
+  AppstoreOutlined,
+} from '@ant-design/icons';
+
 export interface RouteItem {
   path: string;
   name?: string;
-  icon?: string;
+  icon?: React.ReactNode;
   redirect?: string;
   component?: string;
   routes?: Array<RouteItem>;
   hideInMenu?: boolean;
   hideChildrenInMenu?: boolean;
 }
-
 
 const menuList: Array<RouteItem> = [
   {
@@ -18,14 +22,13 @@ const menuList: Array<RouteItem> = [
   {
     path: '/Home',
     name: '首页',
-    icon: 'home',
+    icon: <AppstoreOutlined />,
     component: 'Home/Home',
   },
   {
     path: '/AssetRisk',
     name: '资产风险',
-    icon: 'schedule',
-    component: 'AssetRisk/SecurityBreach/SecurityBreach',
+    icon: <AppstoreOutlined />,
     routes: [
       {
         path: '/',
@@ -33,8 +36,15 @@ const menuList: Array<RouteItem> = [
       },
       {
         path: '/AttackSurfaceManagement',
-        name: '攻击面管理',
-        component: 'AssetRisk/AttackSurfaceManagement',
+        name: '哈哈哈',
+        icon: <AppstoreOutlined />,
+        routes: [
+          {
+            path: '/index',
+            name: '攻击面管理',
+            component: 'AssetRisk/AttackSurfaceManagement',
+          },
+        ],
       },
       {
         path: '/SecurityBreach',

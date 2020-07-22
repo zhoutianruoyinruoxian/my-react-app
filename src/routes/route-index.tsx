@@ -4,35 +4,15 @@ import App from '../App';
 import routeList, { RouteItem } from 'src/config/router.config';
 
 const supportsHistory = 'pushState' in window.history;
-type RouteTransform = (list: RouteItem[], path?: string, nest?: boolean) => Promise<any[]>;
+type RouteTransform = (list: RouteItem[], path?: string) => Promise<any[]>;
 
-const routeTransform: RouteTransform = async (list, path = '', nest) => {
+const routeTransform: RouteTransform = async (list, path = '') => {
   let routerList = [];
   for (let i = 0; i < list.length; i++) {
     const route = list[i];
     if (route.redirect) {
       routerList.push(
-        <Redirect exact from={route.path} to={path + route.redirect} key={route.path} />,
-      );
-      continue;
-    }
-    if (route.component) {
-      const file = await import('src/pages/' + route.component);
-      let childRoutes = null;
-      if (route.routes) {
-        childRoutes = await routeTransform(route.routes, '.', true);
-      }
-      console.log(path + route.path, 3333333)
-      routerList.push(
-        <Route
-          exact={!nest}
-          sensitive
-          component={file.default}
-          path={path + route.path}
-          key={path + route.path}
-        >
-          {childRoutes}
-        </Route>,
+        <Redirect exact from={path + route.path} to={path + route.redirect} key={route.path} />,
       );
       continue;
     }
@@ -40,12 +20,24 @@ const routeTransform: RouteTransform = async (list, path = '', nest) => {
       routerList = routerList.concat(await routeTransform(route.routes, path + route.path));
       continue;
     }
+    if (route.component) {
+      const file = await import('src/pages/' + route.component);
+      routerList.push(
+        <Route
+          exact={true}
+          sensitive
+          component={file.default}
+          path={path + route.path}
+          key={path + route.path}
+        />,
+      );
+      continue;
+    }
   }
-  console.log(routerList, 9999999999)
   return routerList;
 };
 
-export default async (store) => {
+export default async () => {
   const children = await routeTransform(routeList);
   return (
     <BrowserRouter forceRefresh={!supportsHistory}>

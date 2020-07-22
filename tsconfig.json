@@ -21,6 +21,9 @@
       "@": [
         "./src/components"
       ],
+      "containers": [
+        "./src/containers"
+      ],
       "lib": [
         "./src/library"
       ],
