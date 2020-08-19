@@ -1,16 +1,49 @@
 import React, { Component } from 'react';
-import { Content } from 'containers';
+import { Input } from 'antd';
+import { InputValidate } from '@';
+import Test from './Test';
+import { Content, Section } from 'src/containers';
+import './style.scss';
 
-export default class Home extends Component<any, any> {
+
+type OnChange = (event: React.ChangeEvent<HTMLInputElement>) => void;
+export default class InputFormatTest extends Component {
+  state = {
+    value: '',
+  }
+
+  componentDidMount() {
+  }
+
+  onChangeOne: OnChange = (event) => {
+    const value = event.target.value;
+    this.setState({
+      value,
+    })
+  }
+
 
   render() {
+    const { value } = this.state;
     return (
-      <Content>
-
-        <div className="home bip">
-          <p>首页</p>
-        </div>
+      <Content style={{ textAlign: 'left' }} className="home">
+        <Section
+          title="aj"
+        >
+          <label>inputValidate: </label>
+          <InputValidate
+            className="doc-opt-modal-input"
+            value={value}
+            onChange={this.onChangeOne}
+            rules={[
+              {
+                required: true,
+                message: '文件夹名称不能为空',
+              },
+            ]}
+          />
+        </Section>
       </Content>
-    );
+    )
   }
 }

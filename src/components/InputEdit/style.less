@@ -1,0 +1,38 @@
+:global {
+  .input-edit {
+    .ant-input-affix-wrapper {
+      .ant-input-prefix {
+        left: 0;
+        i {
+          padding: 7px;
+          color: #FFF;
+          font-size: 18px;
+          background-color: #1890ff;
+          border-radius: 2px;
+        }
+      }
+      .ant-input {
+        padding-left: 38px;
+      }
+      .ant-input-suffix {
+        right: 6px;
+        .anticon {
+          color: #1890ff;
+          cursor: pointer;
+          &:nth-child(2) {
+            margin-left: 2px;
+            color: #FF7D7D;
+          }
+        }
+      }
+    }
+    .ant-input-affix-wrapper .ant-input-disabled~.ant-input-suffix .anticon {
+      color: #1890ff;
+      cursor: pointer;
+      &:nth-child(2) {
+        margin-left: 2px;
+        color: #FF7D7D;
+      }
+    }
+  }
+}

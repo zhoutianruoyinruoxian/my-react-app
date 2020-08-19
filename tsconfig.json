@@ -30,9 +30,12 @@
       "pages": [
         "./src/pages"
       ],
+      "hooks": [
+        "./src/hooks"
+      ],
       "variable": [
         "./src/style/variable.scss"
-      ]
+      ],
     },
     "lib": [
       "es5",

@@ -27,7 +27,7 @@ const menuList: Array<RouteItem> = [
   },
   {
     path: '/AssetRisk',
-    name: '资产风险',
+    name: '测试1',
     icon: <AppstoreOutlined />,
     component: 'AssetRisk',
     routes: [
@@ -49,8 +49,19 @@ const menuList: Array<RouteItem> = [
       },
       {
         path: '/SecurityBreach',
-        name: '安全漏洞',
+        name: '测试2',
         component: 'AssetRisk/SecurityBreach/SecurityBreach',
+      },
+    ],
+  },
+  {
+    path: '/Test',
+    name: 'Test',
+    routes: [
+      {
+        path: '/Test1',
+        name: 'Test1',
+        component: 'Test/Test1',
       },
     ],
   },

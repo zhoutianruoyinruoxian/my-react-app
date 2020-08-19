@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { ConfigProvider } from 'antd';
 import 'antd/dist/antd.css';
 import zhCN from 'antd/es/locale/zh_CN';
-import route from './routes/route-index';
+import Router from './routes';
 import store, { reducers } from 'src/redux';
 import * as serviceWorker from './serviceWorker';
 import moment from 'moment';
@@ -17,11 +17,10 @@ if (process.env.NODE_ENV !== 'production' && module.hot) {
   module.hot.accept('./redux', () => store.replaceReducer(reducers));
 }
 const renderApp = async () => {
-  const Router = await route(store);
   ReactDOM.render(
     <Provider store={store}>
       <ConfigProvider locale={zhCN}>
-        {Router}
+        <Router store={store} />
       </ConfigProvider>
     </Provider>
     , document.getElementById('root'),

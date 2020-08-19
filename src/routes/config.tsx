@@ -1,9 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import App from '../App';
+import {  Route,  Redirect } from 'react-router-dom';
 import routeList, { RouteItem } from 'src/config/router.config';
 
-const supportsHistory = 'pushState' in window.history;
 type RouteTransform = (list: RouteItem[], path?: string) => Promise<any[]>;
 
 const routeTransform: RouteTransform = async (list, path = '') => {
@@ -50,13 +48,5 @@ const routeTransform: RouteTransform = async (list, path = '') => {
 
 export default async () => {
   const children = await routeTransform(routeList);
-  return (
-    <BrowserRouter forceRefresh={!supportsHistory}>
-      <App>
-        <Switch>
-          {children}
-        </Switch>
-      </App>
-    </BrowserRouter>
-  );
+  return children;
 };
