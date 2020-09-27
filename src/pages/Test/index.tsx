@@ -1,16 +1,27 @@
+
 import React from 'react';
+import { Button, Modal } from 'antd';
 import { AsyncButton } from 'raui';
-import aa from 'raui/AsyncButton/demo/basic.md';
 
-console.log(aa,2312312)
-export default function Demo() {
+export default function test() {
+  const onClick = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        Modal.open({
+          title: '11',
+          content: '22',
+          onCancel: () => {
 
-  const handleClick = () => new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, 2000);
-  });
-
-  return (<AsyncButton onClick={handleClick} >哈哈哈哈</AsyncButton>
+          },
+        });
+        resolve();
+      }, 2000)
+    })
+  };
+  
+  return (
+    <>
+      <AsyncButton onClick={onClick}>点击</AsyncButton>
+    </>
   );
 }

@@ -25,7 +25,7 @@ function Demo() {
     }, 2000)
   });
 
-  return (<AsyncButton onClick={handleClick} />
+  return (<AsyncButton onClick={handleClick} >点击</AsyncButton>
   )
 }
 
