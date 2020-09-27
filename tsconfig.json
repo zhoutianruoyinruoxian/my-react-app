@@ -21,6 +21,9 @@
       "@": [
         "./src/components"
       ],
+      "raui": [
+        "./src/components"
+      ],
       "containers": [
         "./src/containers"
       ],

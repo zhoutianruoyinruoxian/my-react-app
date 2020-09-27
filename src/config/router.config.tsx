@@ -59,6 +59,11 @@ const menuList: Array<RouteItem> = [
     name: 'Test',
     routes: [
       {
+        path: '/Test0',
+        name: 'Test0',
+        component: 'Test',
+      },
+      {
         path: '/Test1',
         name: 'Test1',
         component: 'Test/Test1',

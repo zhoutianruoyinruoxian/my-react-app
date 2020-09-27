@@ -1,0 +1,20 @@
+.slide-enter {
+  height: 0;
+  overflow-y: hidden;
+
+}
+
+.slide-enter-active {
+  height: 32px;
+  transition: height 0.3s;
+}
+
+.slide-leave {
+  height: 32px;
+  overflow-y: hidden;
+}
+
+.slide-leave-active {
+  height: 0;
+  transition: height 0.3s;
+}

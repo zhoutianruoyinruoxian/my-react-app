@@ -11,7 +11,6 @@ const useBindForm: UseBindForm = (initFormData = {}, _form) => {
   useEffect(() => {
     form.setFieldsValue(formData);
   }, [formData]);
-
   return [form, formData, setFormData];
 };
 
