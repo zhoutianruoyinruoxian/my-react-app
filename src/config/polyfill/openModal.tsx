@@ -1,12 +1,14 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
+// @desc getConfirmLocale 的引入地址跟babel-plugin-inport插件的引入文件有关，
+// "libraryDirectory": "lib",则引用antd/lib/modal/locale
+// "libraryDirectory": "es",则引用antd/es/modal/locale
 import { getConfirmLocale } from 'antd/lib/modal/locale';
 import Modal, { ModalFuncProps, destroyFns } from 'antd/lib/modal/Modal';
 
 export default function openModal(config: ModalFuncProps) {
   const div = document.createElement('div');
   document.body.appendChild(div);
-  // eslint-disable-next-line no-use-before-define
   let currentConfig = {
     ...config,
     close,
@@ -32,7 +34,6 @@ export default function openModal(config: ModalFuncProps) {
     }
     for (let i = 0; i < destroyFns.length; i++) {
       const fn = destroyFns[i];
-      // eslint-disable-next-line no-use-before-define
       if (fn === close) {
         destroyFns.splice(i, 1);
         break;
@@ -50,7 +51,7 @@ export default function openModal(config: ModalFuncProps) {
       ReactDOM.render(
         <Modal
           {...props}
-          okText={okText || (props.okCancel ? runtimeLocale.okText : runtimeLocale.justOkText)}
+          okText={okText || runtimeLocale.okText}
           cancelText={cancelText || runtimeLocale.cancelText}
         />,
         div,

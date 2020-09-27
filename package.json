@@ -162,7 +162,7 @@
         "import",
         {
           "libraryName": "antd",
-          "libraryDirectory": "es",
+          "libraryDirectory": "lib",
           "style": "true"
         },
         "antd"
