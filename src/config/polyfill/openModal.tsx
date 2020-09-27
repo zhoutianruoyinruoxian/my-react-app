@@ -3,30 +3,14 @@ import * as ReactDOM from 'react-dom';
 import { getConfirmLocale } from 'antd/lib/modal/locale';
 import Modal, { ModalFuncProps, destroyFns } from 'antd/lib/modal/Modal';
 
-export type ModalFunc = (
-  props: ModalFuncProps,
-) => {
-  destroy: () => void;
-  update: (newConfig: ModalFuncProps) => void;
-};
-
-export interface ModalStaticFunctions {
-  info: ModalFunc;
-  success: ModalFunc;
-  error: ModalFunc;
-  warn: ModalFunc;
-  warning: ModalFunc;
-  confirm: ModalFunc;
-}
-
-export default function confirm(config: ModalFuncProps) {
+export default function openModal(config: ModalFuncProps) {
   const div = document.createElement('div');
   document.body.appendChild(div);
   // eslint-disable-next-line no-use-before-define
   let currentConfig = {
     ...config,
     close,
-    getContainer: false,
+    getContainer: config.getContainer || false,
     visible: true,
     onCancel: () => {
       close();
