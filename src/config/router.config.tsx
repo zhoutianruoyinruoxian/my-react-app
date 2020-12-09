@@ -68,6 +68,11 @@ const menuList: Array<RouteItem> = [
         name: 'Test1',
         component: 'Test/Test1',
       },
+      {
+        path: '/Modal',
+        name: 'Modal',
+        component: 'Test/Modal',
+      },
     ],
   },
 ];
