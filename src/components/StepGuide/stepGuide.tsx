@@ -1,36 +1,11 @@
 import ReactDOM from 'react-dom';
-import React, { ReactNode, useEffect, useState } from 'react';
-import { getPosition } from './utils';
+import React from 'react';
+import StepGuideReactComponent from './StepGuideReactComponent';
+import type { Options, Step } from './StepGuideReactComponent';
+import { getDomPosition, Position } from './position';
+import { onResizeEnd } from './event';
 
-interface Options {
-  prefixCls?: string;
-  doneLabel?: string;
-  nextLabel?: string;
-  showNext?: boolean;
-  skipLabel?: string;
-  showSkip?: boolean;
-}
-
-interface Step {
-  element: string;
-  title: string;
-  content: ReactNode;
-  placement: string;
-}
-
-type Steps = Step[];
-
-interface Position {
-  bottom: number;
-  height: number;
-  left: number;
-  right: number;
-  top: number;
-  width: number;
-  x: number;
-  y: number;
-}
-
+export type Steps = Step[];
 
 export default function StepGuide(stepData: Steps, opt?: Options) {
   const options: Options = {
@@ -40,6 +15,7 @@ export default function StepGuide(stepData: Steps, opt?: Options) {
     showNext: true,
     skipLabel: '跳过',
     showSkip: true,
+    mask: true,
     ...opt,
   };
   const steps = [...stepData]; // 步骤数据
@@ -47,6 +23,7 @@ export default function StepGuide(stepData: Steps, opt?: Options) {
   let currentStep = 0; // 当前步骤
   let targetDom = null; // 目标 DOM节点
   let stepGuideDom = null; // stepguide DOM节点
+  let forceUpdate = 0; // 用于强制更新react组件
 
   start();
 
@@ -55,9 +32,10 @@ export default function StepGuide(stepData: Steps, opt?: Options) {
     const div = document.createElement('div');
     div.classList.add(`${options.prefixCls}-wrapper`);
     body.appendChild(div);
+    body.style.overflow = 'hidden';
     stepGuideDom = div;
     window.addEventListener('resize', resize);
-    getPosition();
+    main();
   }
 
   function exit() {
@@ -68,27 +46,32 @@ export default function StepGuide(stepData: Steps, opt?: Options) {
     if (targetDom) {
       targetDom.classList.remove(`${options.prefixCls}-focused`);
     }
+    const body = document.querySelector('body');
+    body.style.overflow = '';
     window.removeEventListener('resize', resize);
   }
 
   function refresh() {
-    getPosition();
+    main();
   }
 
   function resize() {
-    getPosition();
+    onResizeEnd(() => {
+      forceUpdate++;
+      refresh();
+    });
   }
 
   function goStep() {
     if (currentStep + 1 < stepLength) {
       currentStep++;
-      getPosition();
+      refresh();
     } else {
       exit();
     }
   }
 
-  function getPosition() {
+  function main() {
     if (targetDom) {
       targetDom.classList.remove(`${options.prefixCls}-focused`);
     }
@@ -96,12 +79,11 @@ export default function StepGuide(stepData: Steps, opt?: Options) {
     targetDom = document.querySelector(currentData.element);
     targetDom.scrollIntoView();
     targetDom.classList.add(`${options.prefixCls}-focused`);
-    const position = getDomPosition(targetDom);
-    renderStep(currentData, position);
-
+    const tarPosition = getDomPosition(targetDom);
+    renderStepGuide(currentData, tarPosition);
   }
 
-  function renderStep(currentData: Step, position: Position) {
+  function renderStepGuide(currentData: Step, tarPosition: Position) {
     setTimeout(() => {
       ReactDOM.render(
         <StepGuideReactComponent
@@ -109,9 +91,10 @@ export default function StepGuide(stepData: Steps, opt?: Options) {
           currentData={currentData}
           currentStep={currentStep}
           stepLength={stepLength}
-          position={position}
+          tarPosition={tarPosition}
           onNext={goStep}
           onSkip={exit}
+          forceUpdate={forceUpdate}
         />,
         stepGuideDom);
     });
@@ -122,77 +105,4 @@ export default function StepGuide(stepData: Steps, opt?: Options) {
     goStep,
     exit,
   };
-}
-
-function StepGuideReactComponent({
-  options,
-  currentData,
-  currentStep,
-  stepLength,
-  onNext,
-  onSkip,
-  position: tarPosition,
-}) {
-  const { width, height, left, top } = tarPosition;
-  const { prefixCls, doneLabel, nextLabel, showNext, skipLabel, showSkip } = options;
-  const placement = currentData.placement || 'rightTop';
-  const [style, setStyle] = useState({ arrow: {}, content: {} });
-
-  useEffect(() => {
-    getContentPosition();
-  }, [currentData]);
-
-  const getContentPosition = () => {
-    const stepContent = document.querySelector(`.${options.prefixCls}-content`);
-    const contentPosition = getDomPosition(stepContent);
-    const res = getPosition(placement, tarPosition, contentPosition, 8.5);
-    setStyle(res);
-  };
-
-  return (
-    <>
-      <div className={`${prefixCls}-mask`} />
-      <div
-        className={prefixCls}
-        style={{
-          width, height, left, top,
-        }}
-      >
-        <div className={`${prefixCls}-content ${prefixCls}-placement-${placement}`}
-          style={style.content}
-        >
-          <div className={`${prefixCls}-arrow`} style={style.arrow} />
-          <div className={`${prefixCls}-inner`}>
-            <div className={`${prefixCls}-header`}>
-              {currentData.title}
-            </div>
-            <div className={`${prefixCls}-body`}>
-              {currentData.content}
-            </div>
-            <div className={`${prefixCls}-footer`}>
-              {showSkip &&
-                <span
-                  className={`${prefixCls}-footer-skip`}
-                  onClick={onSkip}
-                >{skipLabel}</span>
-              }
-              {stepLength > 1 &&
-                <span className={`${prefixCls}-footer-total`}>({currentStep + 1}/{stepLength})</span>
-              }
-              {showNext &&
-                <span
-                  className={`${prefixCls}-footer-next`}
-                  onClick={onNext}
-                >{currentStep === stepLength - 1 ? doneLabel : nextLabel}</span>
-              }
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
-
-function getDomPosition(dom: Element): Position {
-  return dom.getBoundingClientRect();
 }
