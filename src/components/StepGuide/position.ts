@@ -54,7 +54,7 @@ function getVerticalPosition(placement: Placement, left: boolean, tarPosition: P
   };
 }
 
-function getHorizontalPosition(placement, top, tarPosition, position, arrowSize) {
+function getHorizontalPosition(placement: Placement, top: boolean, tarPosition: Position, position: Position, arrowSize: number) {
   const { width: winWidth } = getWinSize();
   const {
     width: tarWidth,
@@ -83,7 +83,7 @@ function getHorizontalPosition(placement, top, tarPosition, position, arrowSize)
   };
 }
 
-export function getAutoPosition(placement, tarPosition, position) {
+export function getAutoPosition(placement: Placement, tarPosition: Position, position: Position): Placement {
   const { width: winWidth, height: winHeight } = getWinSize();
   const {
     width: tarWidth,
@@ -97,18 +97,18 @@ export function getAutoPosition(placement, tarPosition, position) {
   } = position;
   if (verticalPlacement.includes(placement)) {
     if (tarWidth + tarLeft + width + space > winWidth) {
-      return placement.replace('right', 'left');
+      return placement.replace('right', 'left') as Placement;
     }
     if (tarLeft < width) {
-      return placement.replace('left', 'right');
+      return placement.replace('left', 'right') as Placement;
     }
     return placement;
   } else {
     if (tarHeight + tarTop + height + space > winHeight) {
-      return placement.replace('bottom', 'top');
+      return placement.replace('bottom', 'top') as Placement;
     }
     if (tarTop < height) {
-      return placement.replace('top', 'bottom');
+      return placement.replace('top', 'bottom') as Placement;
     }
     return placement;
   }

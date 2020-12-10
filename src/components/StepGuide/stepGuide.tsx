@@ -77,7 +77,7 @@ export default function StepGuide(stepData: Steps, opt?: Options) {
     }
     const currentData = steps[currentStep];
     targetDom = document.querySelector(currentData.element);
-    targetDom.scrollIntoView();
+    targetDom.scrollIntoViewIfNeeded();
     targetDom.classList.add(`${options.prefixCls}-focused`);
     const tarPosition = getDomPosition(targetDom);
     renderStepGuide(currentData, tarPosition);

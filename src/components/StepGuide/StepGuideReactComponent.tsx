@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
-import type { FC, ReactNode} from 'react';
+import type { FC, ReactNode } from 'react';
 import { getAutoPosition, getPosition, getDomPosition } from './position';
-import type { Position } from './position';
+import type { Position, Placement } from './position';
 
 export interface Options {
   prefixCls?: string;
@@ -16,9 +16,9 @@ export interface Options {
 
 export interface Step {
   element: string;
-  title: string;
-  content: ReactNode;
-  placement: string;
+  title?: string;
+  content?: ReactNode;
+  placement?: Placement;
 }
 interface StepGuideReactComponentProps {
   forceUpdate: any;
