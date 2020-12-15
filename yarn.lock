@@ -1157,6 +1157,14 @@
     core-js-pure "^3.0.0"
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime-corejs3@^7.12.5":
+  version "7.12.5"
+  resolved "https://registry.npmjs.org/@babel/runtime-corejs3/-/runtime-corejs3-7.12.5.tgz#ffee91da0eb4c6dae080774e94ba606368e414f4"
+  integrity sha512-roGr54CsTmNPPzZoCP1AmDXuBoNao7tnSA83TXTwt+UK5QVyh1DIJnrgYRPWKCF2flqZQXwa7Yr8v7VmLzF0YQ==
+  dependencies:
+    core-js-pure "^3.0.0"
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@7.9.0":
   version "7.9.0"
   resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.9.0.tgz?cache=0&sync_timestamp=1596637824771&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.9.0.tgz#337eda67401f5b066a6f205a3113d4ac18ba495b"
@@ -1168,6 +1176,13 @@
   version "7.11.2"
   resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.11.2.tgz?cache=0&sync_timestamp=1596637824771&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.11.2.tgz#f549c13c754cc40b87644b9fa9f09a6a95fe0736"
   integrity sha1-9UnBPHVMxAuHZEufqfCaapX+BzY=
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
+"@babel/runtime@^7.12.5":
+  version "7.12.5"
+  resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.12.5.tgz#410e7e487441e1b360c29be715d870d9b985882e"
+  integrity sha512-plcc+hbExy3McchJCEQG3knOsuh3HH+Prx1P6cLIkET/0dLuQDEnrT+s27Axgc9bqfsmNUNHfscgMUdBpC9xfg==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -3521,6 +3536,11 @@ core-js-pure@^3.0.0:
   version "3.6.5"
   resolved "https://registry.npm.taobao.org/core-js-pure/download/core-js-pure-3.6.5.tgz#c79e75f5e38dbc85a662d91eea52b8256d53b813"
   integrity sha1-x5519eONvIWmYtke6lK4JW1TuBM=
+
+core-js@2:
+  version "2.6.12"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-2.6.12.tgz#d9333dfa7b065e347cc5682219d6f690859cc2ec"
+  integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
 
 core-js@^2.4.0:
   version "2.6.11"
@@ -9518,6 +9538,15 @@ rc-slider@~9.3.0:
     rc-tooltip "^4.0.0"
     rc-util "^5.0.0"
     shallowequal "^1.1.0"
+
+rc-stepguide@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.npmjs.org/rc-stepguide/-/rc-stepguide-1.0.10.tgz#2524498fe511a4355ef945e17aed21e0251761a0"
+  integrity sha512-I3xriynIj3AyQkP8yxz6RAu0p6ZgosfzzqyffizA6N09kE4KvklDasaMl/piczB3oMSej8EWU/YKdNF7u35vOA==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "@babel/runtime-corejs3" "^7.12.5"
+    core-js "2"
 
 rc-steps@~4.1.0:
   version "4.1.2"

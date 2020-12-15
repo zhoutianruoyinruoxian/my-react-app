@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { FC, ReactNode } from 'react';
 import { getAutoPosition, getPosition, getDomPosition } from './position';
 import type { Position, Placement } from './position';
@@ -9,6 +9,8 @@ export interface Options {
   doneLabel?: ReactNode;
   nextLabel?: ReactNode;
   showNext?: boolean;
+  prevLabel?: ReactNode,
+  showPrev?: boolean,
   skipLabel?: ReactNode;
   showSkip?: boolean;
   mask?: boolean;
@@ -16,33 +18,38 @@ export interface Options {
 
 export interface Step {
   element: string;
-  title?: string;
+  title?: ReactNode;
   content?: ReactNode;
   placement?: Placement;
 }
 interface StepGuideReactComponentProps {
+  target: Element;
   forceUpdate: any;
   options: Options;
   currentData: Step;
   currentStep: number;
   stepLength: number;
+  onPrev: any;
   onNext: any;
   onSkip: any;
   tarPosition: Position;
 }
 
 const StepGuideReactComponent: FC<StepGuideReactComponentProps> = ({
+  target,
   forceUpdate,
   options,
   currentData,
   currentStep,
   stepLength,
+  onPrev,
   onNext,
   onSkip,
   tarPosition, // 目标位置
 }) => {
+  const oldTarget = useRef(null);
   const { width, height, left, top } = tarPosition;
-  const { prefixCls, mask, doneLabel, nextLabel, showNext, skipLabel, showSkip } = options;
+  const { prefixCls, mask, doneLabel, nextLabel, showNext, prevLabel, showPrev, skipLabel, showSkip } = options;
   const { placement: oldPlacement = 'rightTop' } = currentData;
   const [placement, setPlacement] = useState('');
   const [style, setStyle] = useState({ arrow: {}, content: {} });
@@ -66,7 +73,20 @@ const StepGuideReactComponent: FC<StepGuideReactComponentProps> = ({
       <div
         className={prefixCls}
       >
-        <div className={`${prefixCls}-target`} style={{ width, height, left, top }} />
+        <div
+          ref={(targetRef) => {
+            if (!targetRef || oldTarget.current === target) return;
+            if (oldTarget.current) {
+              targetRef.replaceChild(target, oldTarget.current);
+            } else {
+              targetRef.appendChild(target);
+            }
+            oldTarget.current = targetRef.childNodes[0];
+          }}
+          className={`${prefixCls}-target`}
+          style={{ width, height, left, top }}
+        />
+        <div className={`${prefixCls}-target-mask`} style={{ width, height, left, top }} />
         <div className={`${prefixCls}-content ${prefixCls}-placement-${placement}`}
           style={{
             opacity: JSON.stringify(style.content) !== '{}' ? 1 : 0,
@@ -83,19 +103,25 @@ const StepGuideReactComponent: FC<StepGuideReactComponentProps> = ({
             </div>
             <div className={`${prefixCls}-footer`}>
               {showSkip &&
-                <span
+                <div
                   className={`${prefixCls}-footer-skip`}
                   onClick={onSkip}
-                >{skipLabel}</span>
+                >{skipLabel}</div>
               }
               {stepLength > 1 &&
-                <span className={`${prefixCls}-footer-total`}>({currentStep + 1}/{stepLength})</span>
+                <div className={`${prefixCls}-footer-total`}>({currentStep + 1}/{stepLength})</div>
+              }
+              {showPrev &&
+                <div
+                  className={`${prefixCls}-footer-prev`}
+                  onClick={onPrev}
+                >{prevLabel}</div>
               }
               {showNext &&
-                <span
+                <div
                   className={`${prefixCls}-footer-next`}
                   onClick={onNext}
-                >{currentStep === stepLength - 1 ? doneLabel : nextLabel}</span>
+                >{currentStep === stepLength - 1 ? doneLabel : nextLabel}</div>
               }
             </div>
           </div>

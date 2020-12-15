@@ -1,18 +1,12 @@
 $step-guide:'step-guide';
 
-.#{$step-guide}-focused {
-  position: relative;
-  z-index: 9998;
-  background-color: #fff;
-}
-
 .#{$step-guide}-wrapper {
   overflow: hidden;
 }
 
 .#{$step-guide}-mask {
   position: fixed;
-  left: 200px;
+  left: 0;
   right: 0;
   top: 0;
   bottom: 0;
@@ -24,9 +18,11 @@ $step-guide:'step-guide';
 
 .#{$step-guide}-target {
   position: fixed;
-  font-size: 13px;
+  z-index: 9998;
+}
+.#{$step-guide}-target-mask {
+  position: fixed;
   z-index: 9999;
-  transition: all 0.3s;
 }
 
 .#{$step-guide} {
@@ -85,10 +81,11 @@ $step-guide:'step-guide';
       opacity: 0.6;
     }
 
+    &-prev,
     &-next {
       cursor: pointer;
       user-select: none;
-      margin-left: 20px;
+      margin-left: 16px;
       padding: 0 8px;
       font-size: 15px;
       background-color: #fff;

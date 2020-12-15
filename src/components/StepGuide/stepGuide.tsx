@@ -7,16 +7,29 @@ import { onResizeEnd } from './event';
 
 export type Steps = Step[];
 
-export default function StepGuide(stepData: Steps, opt?: Options) {
-  const options: Options = {
+interface Events {
+  onPrev?: (currentStep: number) => void;
+  onNext?: (currentStep: number) => void;
+  created?: (targetDom: Element) => any;
+}
+
+export type Setting = Options & Events
+
+export default function StepGuide(stepData: Steps, setting?: Setting) {
+  const options: Setting = {
     prefixCls: 'step-guide',
     doneLabel: '确定',
     nextLabel: '下一步',
     showNext: true,
+    prevLabel: '上一步',
+    showPrev: false,
     skipLabel: '跳过',
     showSkip: true,
     mask: true,
-    ...opt,
+    onPrev() { },
+    onNext() { },
+    created() { }, // lifeCricle
+    ...setting,
   };
   const steps = [...stepData]; // 步骤数据
   const stepLength = stepData.length; // 步骤总条数
@@ -69,6 +82,15 @@ export default function StepGuide(stepData: Steps, opt?: Options) {
     } else {
       exit();
     }
+    options.onNext(currentStep);
+  }
+
+  function prevStep() {
+    if (currentStep > 0) {
+      currentStep--;
+      refresh();
+    }
+    options.onPrev(currentStep);
   }
 
   function main() {
@@ -79,6 +101,7 @@ export default function StepGuide(stepData: Steps, opt?: Options) {
     targetDom = document.querySelector(currentData.element);
     targetDom.scrollIntoViewIfNeeded();
     targetDom.classList.add(`${options.prefixCls}-focused`);
+    options.created(targetDom);
     const tarPosition = getDomPosition(targetDom);
     renderStepGuide(currentData, tarPosition);
   }
@@ -88,10 +111,12 @@ export default function StepGuide(stepData: Steps, opt?: Options) {
       ReactDOM.render(
         <StepGuideReactComponent
           options={options}
+          target={targetDom.cloneNode(true)}
           currentData={currentData}
           currentStep={currentStep}
           stepLength={stepLength}
           tarPosition={tarPosition}
+          onPrev={prevStep}
           onNext={goStep}
           onSkip={exit}
           forceUpdate={forceUpdate}
@@ -102,6 +127,7 @@ export default function StepGuide(stepData: Steps, opt?: Options) {
 
   return {
     refresh,
+    prevStep,
     goStep,
     exit,
   };

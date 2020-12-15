@@ -1,20 +1,37 @@
-import React, { useRef, useEffect } from 'react';
-import { Button } from 'antd';
-import stepGuideJs from 'src/components/StepGuide';
-import 'src/components/StepGuide/index.scss';
-// import stepGuideJs from 'rc-stepguide';
-// import 'rc-stepguide/lib/index.css';
+---
+order: 1
+title:
+  en-US: Basic Usage
+  zh-CN: 基本用法
+---
 
-export default function Test() {
+## zh-CN
+
+基本用法
+
+## en-US
+
+Basic Usage
+
+`
+
+``` jsx
+
+import { useRef,useEffect } from 'react';
+import { StepGuide } from 'mkui-ext';
+import { Button } from 'mkui-fd';
+
+export default function Demo() {
   const tour = useRef(null);
 
   useEffect(() => {
-    startTour();
+    setTimeout(()=>{startTour();},2000)
+    
     return exit;
   }, []);
 
   const startTour = () => {
-    tour.current = stepGuideJs([
+    tour.current = StepGuide([
       {
         element: '#topLeft',
         title: '第1步',
@@ -98,7 +115,6 @@ export default function Test() {
   const exit = () => {
     let stepGuide = tour.current;
     stepGuide.exit();
-    stepGuide = null;
   };
   return (
     <>
@@ -124,9 +140,14 @@ export default function Test() {
           <Button id="bottomRight">bottomRight</Button>
         </div>
       </div>
-      <div style={{ marginLeft: 200, marginTop: 1500 }}>
+      {/* <div style={{ marginLeft: 200, marginTop: 1500 }}>
         <Button id="out">我在视野之外</Button>
       </div>
+      */}
     </>
   );
 }
+
+ReactDOM.render(<Demo />, mountNode)
+
+````
