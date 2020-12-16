@@ -9,12 +9,13 @@ export interface Position {
   bottom: number;
 }
 
-const scale = 5; // 正常情况下箭头的偏移量
-const space = 12; // 提示框相对目标的位置偏移
+const arrowSize = 6; // 箭头自身相对目标中心的偏移量（标准值为6，箭头tranform之后计算得出来的值，跟箭头自身大小有关）
+const space = 13; // 提示框相对目标的位置偏移量
+const scale = 5; // 正常情况下提示框相对箭头的偏移量(5代表的5分之一位置)
 const verticalPlacement = ['right', 'rightTop', 'rightBottom', 'left', 'leftTop', 'leftBottom'];
 const horizontalPlacement = ['top', 'topLeft', 'topRight', 'bottom', 'bottomLeft', 'bottomRight'];
 
-export function getPosition(placement: Placement, tarPosition: Position, position: Position, arrowSize: number) {
+export function getPosition(placement: Placement, tarPosition: Position, position: Position) {
   if (verticalPlacement.includes(placement)) {
     const left = placement.includes('left');
     return getVerticalPosition(placement, left, tarPosition, position, arrowSize);

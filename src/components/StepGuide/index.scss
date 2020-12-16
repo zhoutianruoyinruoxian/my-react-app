@@ -104,11 +104,13 @@ $step-guide:'step-guide';
     }
   }
 
+  $arrow-position:-6px;
+
   .#{$step-guide}-placement-right,
   .#{$step-guide}-placement-rightTop,
   .#{$step-guide}-placement-rightBottom {
     .#{$step-guide}-arrow {
-      left: -5px;
+      left: $arrow-position;
     }
   }
 
@@ -116,7 +118,7 @@ $step-guide:'step-guide';
   .#{$step-guide}-placement-leftTop,
   .#{$step-guide}-placement-leftBottom {
     .#{$step-guide}-arrow {
-      right: -5px;
+      right: $arrow-position;
     }
   }
 
@@ -124,7 +126,7 @@ $step-guide:'step-guide';
   .#{$step-guide}-placement-topLeft,
   .#{$step-guide}-placement-topRight {
     .#{$step-guide}-arrow {
-      bottom: -5px;
+      bottom: $arrow-position;
     }
   }
 
@@ -132,7 +134,7 @@ $step-guide:'step-guide';
   .#{$step-guide}-placement-bottomLeft,
   .#{$step-guide}-placement-bottomRight {
     .#{$step-guide}-arrow {
-      top: -5px;
+      top: $arrow-position;
     }
   }
 }

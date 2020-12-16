@@ -60,7 +60,7 @@ const StepGuideReactComponent: FC<StepGuideReactComponentProps> = ({
     const contentPosition = getDomPosition(stepContent);
     const autoPlacement = getAutoPosition(oldPlacement, tarPosition, contentPosition);
     setPlacement(autoPlacement);
-    const res = getPosition(autoPlacement, tarPosition, contentPosition, 8.5);
+    const res = getPosition(autoPlacement, tarPosition, contentPosition);
     setStyle(res);
   };
 
