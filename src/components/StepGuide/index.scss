@@ -12,17 +12,23 @@ $step-guide:'step-guide';
   bottom: 0;
   z-index: 9997;
   overflow: hidden;
-  background-color: rgba(33, 33, 33, 0.2);
-  animation: maskColor 0.3s forwards;
-}
+  transition: all 0.3s;
 
-.#{$step-guide}-target {
-  position: fixed;
-  z-index: 9998;
-}
-.#{$step-guide}-target-mask {
-  position: fixed;
-  z-index: 9999;
+  &-item {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: transparent;
+    transition: background-color 0.3s;
+  }
+
+  &-show {
+    .#{$step-guide}-mask-item {
+      background-color: rgba(33, 33, 33, 0.2);
+    }
+  }
 }
 
 .#{$step-guide} {
@@ -130,15 +136,5 @@ $step-guide:'step-guide';
     .#{$step-guide}-arrow {
       top: -5px;
     }
-  }
-}
-
-@keyframes maskColor {
-  from {
-    background-color: transparent;
-  }
-
-  to {
-    background-color: rgba(33, 33, 33, 0.2);
   }
 }

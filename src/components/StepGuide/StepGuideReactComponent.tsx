@@ -1,8 +1,9 @@
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { FC, ReactNode } from 'react';
 import { getAutoPosition, getPosition, getDomPosition } from './position';
 import type { Position, Placement } from './position';
+import Mask from './Mask';
 
 export interface Options {
   prefixCls?: string;
@@ -23,7 +24,6 @@ export interface Step {
   placement?: Placement;
 }
 interface StepGuideReactComponentProps {
-  target: Element;
   forceUpdate: any;
   options: Options;
   currentData: Step;
@@ -36,7 +36,6 @@ interface StepGuideReactComponentProps {
 }
 
 const StepGuideReactComponent: FC<StepGuideReactComponentProps> = ({
-  target,
   forceUpdate,
   options,
   currentData,
@@ -47,8 +46,6 @@ const StepGuideReactComponent: FC<StepGuideReactComponentProps> = ({
   onSkip,
   tarPosition, // 目标位置
 }) => {
-  const oldTarget = useRef(null);
-  const { width, height, left, top } = tarPosition;
   const { prefixCls, mask, doneLabel, nextLabel, showNext, prevLabel, showPrev, skipLabel, showSkip } = options;
   const { placement: oldPlacement = 'rightTop' } = currentData;
   const [placement, setPlacement] = useState('');
@@ -69,24 +66,10 @@ const StepGuideReactComponent: FC<StepGuideReactComponentProps> = ({
 
   return (
     <>
-      {mask && <div className={`${prefixCls}-mask`} />}
+      {mask && <Mask prefixCls={prefixCls} position={tarPosition} />}
       <div
         className={prefixCls}
       >
-        <div
-          ref={(targetRef) => {
-            if (!targetRef || oldTarget.current === target) return;
-            if (oldTarget.current) {
-              targetRef.replaceChild(target, oldTarget.current);
-            } else {
-              targetRef.appendChild(target);
-            }
-            oldTarget.current = targetRef.childNodes[0];
-          }}
-          className={`${prefixCls}-target`}
-          style={{ width, height, left, top }}
-        />
-        <div className={`${prefixCls}-target-mask`} style={{ width, height, left, top }} />
         <div className={`${prefixCls}-content ${prefixCls}-placement-${placement}`}
           style={{
             opacity: JSON.stringify(style.content) !== '{}' ? 1 : 0,

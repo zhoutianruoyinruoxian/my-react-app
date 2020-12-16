@@ -18,7 +18,7 @@ Basic Usage
 ``` jsx
 
 import { useRef,useEffect } from 'react';
-import { StepGuide } from 'mkui-ext';
+import { stepGuide } from 'mkui-ext';
 import { Button } from 'mkui-fd';
 
 export default function Demo() {
@@ -31,7 +31,7 @@ export default function Demo() {
   }, []);
 
   const startTour = () => {
-    tour.current = StepGuide([
+    tour.current = stepGuide([
       {
         element: '#topLeft',
         title: '第1步',
@@ -113,8 +113,9 @@ export default function Demo() {
   };
 
   const exit = () => {
-    let stepGuide = tour.current;
-    stepGuide.exit();
+    const {current} = tour;
+    if(!current) return;
+    current.exit();
   };
   return (
     <>

@@ -99,6 +99,12 @@ export default function StepGuide(stepData: Steps, setting?: Setting) {
     }
     const currentData = steps[currentStep];
     targetDom = document.querySelector(currentData.element);
+    if (!targetDom) {
+      // 如果当前节点不存在，则跳过进入下一步，并抛出错误日志
+      console.error(`element ${currentData.element} is notfound, please check your element in stepData`);
+      goStep();
+      return;
+    }
     targetDom.scrollIntoViewIfNeeded();
     targetDom.classList.add(`${options.prefixCls}-focused`);
     options.created(targetDom);
@@ -111,7 +117,6 @@ export default function StepGuide(stepData: Steps, setting?: Setting) {
       ReactDOM.render(
         <StepGuideReactComponent
           options={options}
-          target={targetDom.cloneNode(true)}
           currentData={currentData}
           currentStep={currentStep}
           stepLength={stepLength}

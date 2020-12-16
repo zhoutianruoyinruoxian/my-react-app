@@ -1,20 +1,20 @@
 import React, { useRef, useEffect } from 'react';
 import { Button } from 'antd';
-import stepGuideJs from 'src/components/StepGuide';
+import stepGuide from 'src/components/StepGuide';
 import 'src/components/StepGuide/index.scss';
-// import stepGuideJs from 'rc-stepguide';
+// import stepGuide from 'rc-stepguide';
 // import 'rc-stepguide/lib/index.css';
 
 export default function Test() {
-  const tour = useRef(null);
+  const StepGuide = useRef(null);
 
   useEffect(() => {
-    startTour();
+    startStepGuide();
     return exit;
   }, []);
 
-  const startTour = () => {
-    tour.current = stepGuideJs([
+  const startStepGuide = () => {
+    StepGuide.current = stepGuide([
       {
         element: '#topLeft',
         title: '第1步',
@@ -96,10 +96,11 @@ export default function Test() {
   };
 
   const exit = () => {
-    let stepGuide = tour.current;
-    stepGuide.exit();
-    stepGuide = null;
+    const { current } = StepGuide;
+    if (!current) return;
+    current.exit();
   };
+
   return (
     <>
       <div style={{ marginLeft: 200, marginTop: 150 }}>
