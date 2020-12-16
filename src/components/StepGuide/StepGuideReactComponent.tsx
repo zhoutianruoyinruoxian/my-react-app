@@ -67,46 +67,42 @@ const StepGuideReactComponent: FC<StepGuideReactComponentProps> = ({
   return (
     <>
       {mask && <Mask prefixCls={prefixCls} position={tarPosition} />}
-      <div
-        className={prefixCls}
+      <div className={`${prefixCls}-content ${prefixCls}-placement-${placement}`}
+        style={{
+          opacity: JSON.stringify(style.content) !== '{}' ? 1 : 0,
+          ...style.content,
+        }}
       >
-        <div className={`${prefixCls}-content ${prefixCls}-placement-${placement}`}
-          style={{
-            opacity: JSON.stringify(style.content) !== '{}' ? 1 : 0,
-            ...style.content,
-          }}
-        >
-          <div className={`${prefixCls}-arrow`} style={style.arrow} />
-          <div className={`${prefixCls}-inner`}>
-            <div className={`${prefixCls}-header`}>
-              {currentData.title}
-            </div>
-            <div className={`${prefixCls}-body`}>
-              {currentData.content}
-            </div>
-            <div className={`${prefixCls}-footer`}>
-              {showSkip &&
-                <div
-                  className={`${prefixCls}-footer-skip`}
-                  onClick={onSkip}
-                >{skipLabel}</div>
-              }
-              {stepLength > 1 &&
-                <div className={`${prefixCls}-footer-total`}>({currentStep + 1}/{stepLength})</div>
-              }
-              {showPrev &&
-                <div
-                  className={`${prefixCls}-footer-prev`}
-                  onClick={onPrev}
-                >{prevLabel}</div>
-              }
-              {showNext &&
-                <div
-                  className={`${prefixCls}-footer-next`}
-                  onClick={onNext}
-                >{currentStep === stepLength - 1 ? doneLabel : nextLabel}</div>
-              }
-            </div>
+        <div className={`${prefixCls}-arrow`} style={style.arrow} />
+        <div className={`${prefixCls}-inner`}>
+          <div className={`${prefixCls}-header`}>
+            {currentData.title}
+          </div>
+          <div className={`${prefixCls}-body`}>
+            {currentData.content}
+          </div>
+          <div className={`${prefixCls}-footer`}>
+            {showSkip &&
+              <div
+                className={`${prefixCls}-footer-skip`}
+                onClick={onSkip}
+              >{skipLabel}</div>
+            }
+            {stepLength > 1 &&
+              <div className={`${prefixCls}-footer-total`}>({currentStep + 1}/{stepLength})</div>
+            }
+            {showPrev &&
+              <div
+                className={`${prefixCls}-footer-prev`}
+                onClick={onPrev}
+              >{prevLabel}</div>
+            }
+            {showNext &&
+              <div
+                className={`${prefixCls}-footer-next`}
+                onClick={onNext}
+              >{currentStep === stepLength - 1 ? doneLabel : nextLabel}</div>
+            }
           </div>
         </div>
       </div>

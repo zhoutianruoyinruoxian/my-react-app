@@ -10,6 +10,8 @@ export type Steps = Step[];
 interface Events {
   onPrev?: (currentStep: number) => void;
   onNext?: (currentStep: number) => void;
+  onOk?: (currentStep: number) => void;
+  onSkip?: Function;
   created?: (targetDom: Element) => any;
 }
 
@@ -28,6 +30,8 @@ export default function StepGuide(stepData: Steps, setting?: Setting) {
     mask: true,
     onPrev() { },
     onNext() { },
+    onOk() { },
+    onSkip() { },
     created() { }, // lifeCricle
     ...setting,
   };
@@ -43,7 +47,7 @@ export default function StepGuide(stepData: Steps, setting?: Setting) {
   function start() {
     const body = document.querySelector('body');
     const div = document.createElement('div');
-    div.classList.add(`${options.prefixCls}-wrapper`);
+    div.classList.add(`${options.prefixCls}`);
     body.appendChild(div);
     body.style.overflow = 'hidden';
     stepGuideDom = div;
@@ -79,10 +83,11 @@ export default function StepGuide(stepData: Steps, setting?: Setting) {
     if (currentStep + 1 < stepLength) {
       currentStep++;
       refresh();
+      options.onNext(currentStep);
     } else {
       exit();
+      options.onOk(currentStep);
     }
-    options.onNext(currentStep);
   }
 
   function prevStep() {
@@ -91,6 +96,11 @@ export default function StepGuide(stepData: Steps, setting?: Setting) {
       refresh();
     }
     options.onPrev(currentStep);
+  }
+
+  function goSkip() {
+    exit();
+    options.onSkip();
   }
 
   function main() {
@@ -123,7 +133,7 @@ export default function StepGuide(stepData: Steps, setting?: Setting) {
           tarPosition={tarPosition}
           onPrev={prevStep}
           onNext={goStep}
-          onSkip={exit}
+          onSkip={goSkip}
           forceUpdate={forceUpdate}
         />,
         stepGuideDom);

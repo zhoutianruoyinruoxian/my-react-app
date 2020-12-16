@@ -1,43 +1,41 @@
 $step-guide:'step-guide';
 
-.#{$step-guide}-wrapper {
+.#{$step-guide} {
   overflow: hidden;
-}
 
-.#{$step-guide}-mask {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 9997;
-  overflow: hidden;
-  transition: all 0.3s;
 
-  &-item {
-    position: absolute;
-    left: 0;
+  &-mask {
+    position: fixed;
+    left: 200px;
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: transparent;
-    transition: background-color 0.3s;
-  }
+    z-index: 9997;
+    overflow: hidden;
+    transition: all 0.3s;
 
-  &-show {
-    .#{$step-guide}-mask-item {
-      background-color: rgba(33, 33, 33, 0.2);
+    &-item {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background-color: transparent;
+      transition: background-color 0.3s;
+    }
+
+    &-show {
+      .#{$step-guide}-mask-item {
+        background-color: rgba(33, 33, 33, 0.2);
+      }
     }
   }
-}
-
-.#{$step-guide} {
-  color: #fff;
 
   &-content {
     position: fixed;
-    opacity: 0;
     z-index: 9999;
+    color: #fff;
+    opacity: 0;
     transition: all 0.3s;
   }
 
