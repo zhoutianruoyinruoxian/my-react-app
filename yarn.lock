@@ -9539,13 +9539,14 @@ rc-slider@~9.3.0:
     rc-util "^5.0.0"
     shallowequal "^1.1.0"
 
-rc-stepguide@^1.0.10:
-  version "1.0.10"
-  resolved "https://registry.npmjs.org/rc-stepguide/-/rc-stepguide-1.0.10.tgz#2524498fe511a4355ef945e17aed21e0251761a0"
-  integrity sha512-I3xriynIj3AyQkP8yxz6RAu0p6ZgosfzzqyffizA6N09kE4KvklDasaMl/piczB3oMSej8EWU/YKdNF7u35vOA==
+rc-stepguide@^1.0.15:
+  version "1.0.15"
+  resolved "https://registry.npmjs.org/rc-stepguide/-/rc-stepguide-1.0.15.tgz#61c2f98fd2985425baecbe43b2d37560b67c8c89"
+  integrity sha512-6afcc3ceGOIHYn/FqnUOVA6xXHLKt9Q6TzPZF/3Rg8t0TyL9+TIBqsmzLCNT/0gk2mtTcZqeZSKS9E+aYpx1hQ==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@babel/runtime-corejs3" "^7.12.5"
+    classnames "^2.2.6"
     core-js "2"
 
 rc-steps@~4.1.0:

@@ -64,8 +64,13 @@ const menuList: Array<RouteItem> = [
         component: 'Test',
       },
       {
+        path: '/BasicStep',
+        name: 'stepGuide BasicUsage',
+        component: 'Test/BasicStep',
+      },
+      {
         path: '/AdvancedStep',
-        name: 'AdvancedStep',
+        name: 'stepGuide AdvancedUsage',
         component: 'Test/AdvancedStep',
       },
       {

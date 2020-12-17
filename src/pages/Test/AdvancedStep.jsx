@@ -16,12 +16,6 @@ export default function Demo() {
         element: '#step1',
         title: '第1步',
         content: '这是第1步',
-      },
-      {
-        element: '#step2',
-        title: '第2步',
-        content: '这是第2步',
-        placement: 'left',
         useEffect(next, dom) {
           dom.parentNode.style.cssText += 'left:-50px';
           setTimeout(next, 300);
@@ -31,10 +25,16 @@ export default function Demo() {
         },
       },
       {
+        element: '#step2',
+        title: '第2步',
+        content: '这是第2步',
+        placement: 'right',
+      },
+      {
         element: '#step3',
         title: '第3步',
         content: '这是第3步',
-        placement: 'left',
+        placement: 'right',
         useEffect(next, dom) {
           dom.parentNode.style.cssText += 'left:-50px';
           setTimeout(next, 300);
@@ -60,7 +60,7 @@ export default function Demo() {
     <>
       <Button onClick={() => startTour()} type="primary">点我</Button>
       <div style={{ marginLeft: 200 }}>
-        <Button id="step1">嘿嘿</Button>
+        <Button id="step2">嘿嘿</Button>
         <div
           id="step4"
           style={{
@@ -94,7 +94,7 @@ export default function Demo() {
                 padding: 10,
                 color: '#fff',
               }}
-              id="step2"
+              id="step1"
             >删除</span>
           </div>
         </div>
