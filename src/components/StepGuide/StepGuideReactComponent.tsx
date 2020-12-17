@@ -22,6 +22,7 @@ export interface Step {
   title?: ReactNode;
   content?: ReactNode;
   placement?: Placement;
+  useEffect?: (next: Function, dom, currentData: Step) => Function | void;
 }
 interface StepGuideReactComponentProps {
   forceUpdate: any;

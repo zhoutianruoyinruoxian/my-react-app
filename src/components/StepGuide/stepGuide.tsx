@@ -12,7 +12,6 @@ interface Events {
   onNext?: (currentStep: number) => void;
   onOk?: (currentStep: number) => void;
   onSkip?: Function;
-  created?: (targetDom: Element) => any;
 }
 
 export type Setting = Options & Events
@@ -32,7 +31,6 @@ export default function StepGuide(stepData: Steps, setting?: Setting) {
     onNext() { },
     onOk() { },
     onSkip() { },
-    created() { }, // lifeCricle
     ...setting,
   };
   const steps = [...stepData]; // 步骤数据
@@ -41,7 +39,7 @@ export default function StepGuide(stepData: Steps, setting?: Setting) {
   let targetDom = null; // 目标 DOM节点
   let stepGuideDom = null; // stepguide DOM节点
   let forceUpdate = 0; // 用于强制更新react组件
-
+  let unMount: Function | void; // 存储useEffect返回的卸载函数，整体行为类似与react-hook useEffect
   start();
 
   function start() {
@@ -63,6 +61,7 @@ export default function StepGuide(stepData: Steps, setting?: Setting) {
     if (targetDom) {
       targetDom.classList.remove(`${options.prefixCls}-focused`);
     }
+    unMount && unMount();
     const body = document.querySelector('body');
     body.style.overflow = '';
     window.removeEventListener('resize', resize);
@@ -104,6 +103,7 @@ export default function StepGuide(stepData: Steps, setting?: Setting) {
   }
 
   function main() {
+    unMount && unMount();
     if (targetDom) {
       targetDom.classList.remove(`${options.prefixCls}-focused`);
     }
@@ -115,11 +115,18 @@ export default function StepGuide(stepData: Steps, setting?: Setting) {
       goStep();
       return;
     }
-    targetDom.scrollIntoViewIfNeeded();
+    if (currentData.useEffect) {
+      unMount = currentData.useEffect(next, targetDom, currentData);
+    } else {
+      targetDom.scrollIntoViewIfNeeded();
+      next();
+    }
+  }
+
+  function next() {
     targetDom.classList.add(`${options.prefixCls}-focused`);
-    options.created(targetDom);
     const tarPosition = getDomPosition(targetDom);
-    renderStepGuide(currentData, tarPosition);
+    renderStepGuide(steps[currentStep], tarPosition);
   }
 
   function renderStepGuide(currentData: Step, tarPosition: Position) {

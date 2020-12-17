@@ -1,5 +1,5 @@
 /**
- * @desc 自定义hook，仅限于同步场景
+ * @desc 自定义hook，因为会在Didmount时触发，所以至少要保证第一个节点是静态的，不是异步返回后生成的
  */
 
 import { useEffect, useRef } from 'react';
