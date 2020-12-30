@@ -124,6 +124,7 @@ const initPagination = {
 };
 
 AsyncTable.defaultProps = {
+  columns: [],
   onChange() { },
   beforeRequest: (pagination, filters, sorter) => ({
     currPage: pagination.current,

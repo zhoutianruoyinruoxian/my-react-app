@@ -1,0 +1,16 @@
+$ellipsis:'rc-ellipsis';
+
+.#{$ellipsis} {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: bottom;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.#{$ellipsis}-tooltip {
+  max-width: 120px;
+  word-wrap: break-word;
+  word-break: break-all;
+}

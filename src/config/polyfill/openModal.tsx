@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// @desc getConfirmLocale 的引入地址跟babel-plugin-inport插件的引入文件有关，
-// "libraryDirectory": "lib",则引用antd/lib/modal/locale
-// "libraryDirectory": "es",则引用antd/es/modal/locale
+/**
+ * @desc getConfirmLocale 的引入地址跟babel-plugin-inport插件的引入文件有关，
+ * "libraryDirectory": "lib",则引用antd/lib/modal/locale
+ * "libraryDirectory": "es",则引用antd/es/modal/locale
+*/
 import { getConfirmLocale } from 'antd/lib/modal/locale';
 import Modal, { ModalFuncProps, destroyFns } from 'antd/lib/modal/Modal';
 

@@ -8,4 +8,5 @@ export { default as InputFormat } from './InputFormat';
 export { default as Step } from './Step';
 export { default as Gantt } from './Gantt';
 export { default as InputValidate } from './InputValidate';
+export { default as InputEdit } from './InputEdit/InputEdit';
 export { default as AsyncButton } from './AsyncButton';
