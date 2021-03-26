@@ -34,7 +34,7 @@ const InputValidate = (props, ref) => {
 
   useEffect(() => {
     // if ('value' in props) {
-      setState({ value });
+    setState({ value });
     // }
   }, [value]);
 
@@ -43,7 +43,7 @@ const InputValidate = (props, ref) => {
   }, [state.value, disabled]);
 
 
-  const validateVal = (val, callback) => {
+  const validateVal = (val, callback?: Function) => {
     let ifError = false;
     // disabled状态不做校验
     if (disabled) {

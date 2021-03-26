@@ -14,6 +14,6 @@ export default () => (
       width: '100%',
     }}
   >
-    数蜂科技上云迁云团队
+    made by zhoutian
   </Footer >
 );
