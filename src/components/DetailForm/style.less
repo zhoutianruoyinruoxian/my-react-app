@@ -1,0 +1,26 @@
+.detail-form {
+  margin-top: -15px;
+
+  .title {
+    display: block;
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 40px;
+
+    &.border {
+      &::before {
+        display: block;
+        height: 8px;
+        background-color: #f0f2f5;
+        content: '';
+      }
+    }
+  }
+
+  .mkui-input.mkui-input-disabled.mkui-input-li,
+  .mkui-select.mkui-select-disabled .mkui-select-selector {
+    border-bottom: 1px dashed #d9d9d9 !important;
+    color: #333 !important;
+  }
+}

@@ -1,11 +1,12 @@
 import React from 'react';
-import {  Route,  Redirect } from 'react-router-dom';
+import type { ReactDOM } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 import routeList, { RouteItem } from 'src/config/router.config';
 
 type RouteTransform = (list: RouteItem[], path?: string) => Promise<any[]>;
 
 const routeTransform: RouteTransform = async (list, path = '') => {
-  let routerList = [];
+  let routerList: JSX.Element[] = [];
   for (let i = 0; i < list.length; i++) {
     const route = list[i];
     if (route.redirect) {

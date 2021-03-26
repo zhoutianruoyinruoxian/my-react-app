@@ -74,9 +74,9 @@ const menuList: Array<RouteItem> = [
         component: 'Test/AdvancedStep',
       },
       {
-        path: '/Test1',
-        name: 'Test1',
-        component: 'Test/Test1',
+        path: '/Form',
+        name: 'Form',
+        component: 'Test/Form',
       },
       {
         path: '/Modal',
@@ -84,6 +84,11 @@ const menuList: Array<RouteItem> = [
         component: 'Test/Modal',
       },
     ],
+  },
+  {
+    path: '/DetailForm',
+    name: 'DetailForm',
+    component: 'DetailForm',
   },
 ];
 
