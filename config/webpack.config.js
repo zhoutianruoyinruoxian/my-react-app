@@ -499,17 +499,11 @@ module.exports = function (webpackEnv) {
                 {
                   loader: 'less-loader',
                   options: {
-                    lessOptions: {
-                      javascriptEnabled: true,
-                    },
+                    javascriptEnabled: true,
                     sourceMap: true,
                   },
                 },
               ],
-              // Don't consider CSS imports dead code even if the
-              // containing package claims to have no side effects.
-              // Remove this when webpack adds a warning or an error for this.
-              // See https://github.com/webpack/webpack/issues/6571
               sideEffects: true,
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.

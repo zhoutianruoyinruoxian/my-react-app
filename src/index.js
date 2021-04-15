@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConfigProvider } from 'antd';
-import 'antd/dist/antd.less';
+import './style/theme.less';
 import zhCN from 'antd/es/locale/zh_CN';
 import Router from './routes';
 import store, { reducers } from 'src/redux';

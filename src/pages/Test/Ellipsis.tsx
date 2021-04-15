@@ -15,7 +15,7 @@ export default function () {
       <div style={{ width: 100, backgroundColor: '#ddd' }}>
         <Ellipsis content={<span><DeleteOutlined style={{ float: 'left' }} />{text}</span>} />
       </div>
-      <Button onClick={() => setText('哈哈哈哈哈哈哈哈哈哈哈哈哈哈')}>点击1</Button>
+      <Button type="primary" onClick={() => setText('哈哈哈哈哈哈哈哈哈哈哈哈哈哈')}>点击1</Button>
       <Button onClick={() => setText('哈哈哈')}>点击</Button>
     </>
   );

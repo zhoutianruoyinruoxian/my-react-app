@@ -72,17 +72,18 @@ class MainHeader extends Component<Iprops, any> {
     );
 
     return (
-      <Header className="header main-header">
-        <a className="logo" >
+      <Header className="main-header">
+        <a className="main-header-logo" >
           {/* <img src={logo} width="140" height="48" /> */}
+          <span>RAUI</span>
         </a>
-        <div className="header-left">
+        <div className="main-header-left">
           <a onClick={this.toggleMenu} >
             <Icon type={`menu-${hideMenu ? 'un' : ''}fold`} />
           </a>
           <Breadcrumb />
         </div>
-        <div className="header-right">
+        <div className="main-header-right">
           <Dropdown overlay={regionMenu}>
             <a className="ant-dropdown-link" onClick={e => { console.log(e, 999) }}>
               Hover me <Icon type="down" />

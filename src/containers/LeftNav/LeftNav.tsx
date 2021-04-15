@@ -113,6 +113,7 @@ class LeftNav extends PureComponent<LeftNavProps & RouteComponentProps, Istate> 
         trigger={null}
         collapsible
         collapsed={hideMenu}
+        theme="light"
       >
         <Menu
           className="left-nav-menu"
