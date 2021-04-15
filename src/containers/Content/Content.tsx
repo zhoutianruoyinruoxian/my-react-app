@@ -1,5 +1,4 @@
 import React, { SFC } from 'react';
-import { Header } from 'src/containers';
 import './style.scss';
 
 interface InitProps {
@@ -21,7 +20,6 @@ const Content: SFC<Iprops> = ({
 }) => {
   return (
     <>
-      <Header />
       <div className={`main-content ${className}`} {...args}>
         <h1>{title}</h1>
         <div>{children}</div>
