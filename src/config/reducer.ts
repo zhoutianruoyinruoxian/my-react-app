@@ -1,1 +1,1 @@
-export const reducer = (store, action) => ({ ...store, ...action });
+export const reducer = (store: object, action: object) => ({ ...store, ...action });

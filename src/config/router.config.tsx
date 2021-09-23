@@ -90,6 +90,10 @@ const menuList: Array<RouteItem> = [
     name: 'DetailForm',
     component: 'DetailForm',
   },
+  {
+    path: '/login',
+    component: 'Login',
+  },
 ];
 
 export default menuList;

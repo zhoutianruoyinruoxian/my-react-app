@@ -8,7 +8,7 @@ export interface ApiList {
 }
 
 const apiList: ApiList = {
-  company: { url: '/api/company', method: 'get', desc: '测试' },
+  login: { url: '/api/login', method: 'post', desc: '登陆' },
   // api: { url: '/api', method: 'get', desc: '测试' },
   // addCat: { url: '/nest/cat/create', method: 'post', desc: '测试' },
   // getCat: { url: '/nest/cat/all', method: 'get', desc: '测试' },

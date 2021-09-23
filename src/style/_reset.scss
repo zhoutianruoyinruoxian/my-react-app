@@ -6,11 +6,7 @@ a.normal {
   color: #fff;
 }
 
-.ant-layout-content {
-  flex: none;
-}
-
-.ant-input {
+.ant-input,.ant-form-item-control-input {
   width: 200px;
 }
 

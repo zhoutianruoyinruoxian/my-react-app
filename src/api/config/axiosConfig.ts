@@ -11,6 +11,7 @@ export interface ReturnDataType {
 interface DefaultOption extends AxiosRequestConfig {
   errorHandling: boolean;
 }
+
 export const defaultOption: DefaultOption = {
   timeout: 10000,
   errorHandling: true,
