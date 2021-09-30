@@ -10,7 +10,6 @@ interface UseTableSelectRes<T> {
   rowSelection: RowSelection<T>;
 }
 
-
 export function useTableSelect<T = Record<string, unknown>>(rowKey: string = 'id'): UseTableSelectRes<T> {
 
   const [selectedList, setSelectedList] = useState<T[]>([]);
