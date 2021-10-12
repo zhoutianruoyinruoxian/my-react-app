@@ -10,7 +10,7 @@ type OnChange = (event: React.ChangeEvent<HTMLInputElement>) => void;
 export default class InputFormatTest extends Component {
   state = {
     value: '',
-  }
+  };
 
   componentDidMount() {
   }
@@ -19,9 +19,8 @@ export default class InputFormatTest extends Component {
     const value = event.target.value;
     this.setState({
       value,
-    })
-  }
-
+    });
+  };
 
   render() {
     const { value } = this.state;
@@ -44,6 +43,6 @@ export default class InputFormatTest extends Component {
           />
         </Section>
       </Content>
-    )
+    );
   }
 }

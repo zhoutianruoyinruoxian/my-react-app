@@ -46,10 +46,8 @@
     ], // 缩进
     "comma-spacing": 2,
     "computed-property-spacing": 2,
-    "semi": [
-      "error",
-      "always"
-    ], //句末加分号
+    "semi": 0, //句末加分号，在ts文件中会有问题，所以禁用掉eslint本身的，开启typescript的
+    "@typescript-eslint/semi": 2, //句末加分号，在ts文件中会有问题，所以禁用掉eslint本身的，开启typescript的
     "space-infix-ops": 2, // 要求中缀操作符周围有空格
     "space-in-parens": [
       2,
