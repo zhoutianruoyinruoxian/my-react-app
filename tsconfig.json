@@ -9,6 +9,7 @@
     "experimentalDecorators": true,
     "allowUnreachableCode": true,
     "allowJs": true,
+    "outDir": "/", // 解决tsconfig.json文件报错无法写入文件的问题
     "baseUrl": ".",
     "locale": "zh-cn",
     "paths": {
@@ -50,6 +51,9 @@
     ]
   },
   "include": [
-    "./src/**/*"
+    "src/**/*"
   ],
+  "exclude": [
+    "node_modules"
+  ]
 }
